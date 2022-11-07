@@ -56,3 +56,12 @@ Wrong user name or password [28000-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:510)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 50 more
+2022-11-07 15:14:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "create table task_groups(\000a    id int primary key auto_increment,\000a    description varchar(100) not null,\000a    done bit\000a)\000a[*]alter table tasks add column task_group_id int null"
+Syntax error in SQL statement "create table task_groups(\000a    id int primary key auto_increment,\000a    description varchar(100) not null,\000a    done bit\000a)\000a[*]alter table tasks add column task_group_id int null"; SQL statement:
+create table task_groups(
+    id int primary key auto_increment,
+    description varchar(100) not null,
+    done bit
+)
+alter table tasks add column task_group_id int null [42000-214]

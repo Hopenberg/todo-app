@@ -3,24 +3,21 @@ package io.hopenberg.apps.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "tasks")
-public class Task {
+@Table(name = "task_groups")
+public class TaskGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "The description cannot be empty")
     private String description;
     private boolean done;
-    private LocalDateTime deadline;
-    @Embedded
-    private Audit audit = new Audit();
-    @ManyToOne
-    @JoinColumn(name = "task_group_id")
-    private TaskGroup group;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private Set<Task> tasks;
 
-    public Task() {
+    public TaskGroup() {
     }
 
     public int getId() {
@@ -45,19 +42,5 @@ public class Task {
 
     public void setDone(boolean done) {
         this.done = done;
-    }
-
-    public LocalDateTime getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
-    }
-
-    public void updateFrom(final Task source) {
-        description = source.description;
-        done = source.done;
-        deadline = source.deadline;
     }
 }
