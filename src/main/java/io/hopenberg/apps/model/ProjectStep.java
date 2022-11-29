@@ -2,23 +2,21 @@ package io.hopenberg.apps.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
-@Table(name = "projects")
-public class Project {
+@Table(name = "project_steps")
+public class ProjectStep {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "The description cannot be empty")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private Set<ProjectStep> steps;
-    @OneToMany(mappedBy = "project")
-    private Set<TaskGroup> groups;
+    private Integer daysToDeadline;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
-    public Project() {
+    public ProjectStep() {
     }
 
     public int getId() {
@@ -37,19 +35,19 @@ public class Project {
         this.description = description;
     }
 
-    public Set<ProjectStep> getSteps() {
-        return steps;
+    public Integer getDaysToDeadline() {
+        return daysToDeadline;
     }
 
-    public void setSteps(Set<ProjectStep> steps) {
-        this.steps = steps;
+    public void setDaysToDeadline(Integer daysToDeadline) {
+        this.daysToDeadline = daysToDeadline;
     }
 
-    public Set<TaskGroup> getGroups() {
-        return groups;
+    public Project getProject() {
+        return project;
     }
 
-    public void setGroups(Set<TaskGroup> groups) {
-        this.groups = groups;
+    public void setProject(Project project) {
+        this.project = project;
     }
 }
