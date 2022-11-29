@@ -1,20 +1,18 @@
 package io.hopenberg.apps;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties("task")
 public class TaskConfigurationProperties {
-
     private Template template;
 
     public Template getTemplate() {
         return template;
     }
 
-    public void setTemplate(Template template) {
+    public void setTemplate(final Template template) {
         this.template = template;
     }
 
@@ -25,7 +23,7 @@ public class TaskConfigurationProperties {
             return allowMultipleTasks;
         }
 
-        public void setAllowMultipleTasks(boolean allowMultipleTasks) {
+        public void setAllowMultipleTasks(final boolean allowMultipleTasks) {
             this.allowMultipleTasks = allowMultipleTasks;
         }
     }
